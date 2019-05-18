@@ -9,14 +9,16 @@ module.exports = {
   entry: {
     app: [
       'idempotent-babel-polyfill',
-      path.resolve(__dirname, './src/client/index.js')
+      path.resolve(__dirname, './src/server/index.js')
     ]
   },
   output: {
     path: path.resolve(__dirname, outputDirectory),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    libraryTarget: 'commonjs2'
   },
+  target: 'node',
   node: {
     fs: 'empty'
   },

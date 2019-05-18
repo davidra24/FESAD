@@ -1,9 +1,21 @@
+const http = require('http');
 const express = require('express');
-const os = require('os');
+const api = require('./api/api');
+const path = require('path');
+const bundle = '../../dist/index.html';
 
 const app = express();
+const server = http.createServer(app);
+const port = process.env.PORT || 8080;
+
+server.listen(port, () => {
+  console.log(`Server listen in port ${port}`);
+});
 
 app.use(express.static('dist'));
-app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
+//app.use('/api', api);
 
-app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
+app.get('*', (req, res) => {
+  const index = path.join(__dirname, bundle);
+  res.sendFile(index);
+});
