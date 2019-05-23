@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import AgregarPrograma from '../../components/programas/AgregarPrograma';
 import ConsultarPrograma from '../../components/programas/ConsutlarPrograma';
 import Loading from '../../components/loading/Loading';
+import 'dotenv/config';
 
 class Programa extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Programa extends Component {
       errorData: null
     });
     try {
-      const response = await fetch('http://localhost:8080/api/programas', {
+      const response = await fetch('process.env.API_PROGRAMAS', {
         mode: 'no-cors'
       });
       const data = await response.json();
@@ -64,7 +65,7 @@ class Programa extends Component {
     try {
       //console.log(info);
 
-      const response = await fetch('http://localhost:8080/api/programas', {
+      const response = await fetch(process.env.API_PROGRAMAS, {
         method: 'POST', // or 'PUT'
         body: JSON.stringify(this.state.form),
         headers: {
