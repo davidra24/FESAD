@@ -20,7 +20,8 @@ class Programa extends Component {
     form: {
       nombre: '',
       semestres: ''
-    }
+    },
+    api_programas: 'https://fesad.herokuapp.com/api/programas'
   };
   semesters() {
     let arr = new Array();
@@ -38,7 +39,7 @@ class Programa extends Component {
       errorData: null
     });
     try {
-      const response = await fetch(process.env.API_PROGRAMAS, {
+      const response = await fetch(this.state.api_programas, {
         mode: 'no-cors'
       });
       const data = await response.json();
@@ -65,7 +66,7 @@ class Programa extends Component {
     try {
       //console.log(info);
 
-      const response = await fetch(process.env.API_PROGRAMAS, {
+      const response = await fetch(this.state.api_programas, {
         method: 'POST', // or 'PUT'
         body: JSON.stringify(this.state.form),
         headers: {
