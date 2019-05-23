@@ -5,6 +5,7 @@ import Loading from '../../components/loading/Loading';
 import 'dotenv/config';
 
 class Programa extends Component {
+  
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,7 +21,8 @@ class Programa extends Component {
     form: {
       nombre: '',
       semestres: ''
-    }
+    },
+    API_PROGRAMAS = 'https://fesad.herokuapp.com/api/programas'
   };
   semesters() {
     let arr = new Array();
@@ -38,7 +40,7 @@ class Programa extends Component {
       errorData: null
     });
     try {
-      const response = await fetch('process.env.API_PROGRAMAS', {
+      const response = await fetch(this.state.API_PROGRAMAS, {
         mode: 'no-cors'
       });
       const data = await response.json();
@@ -65,7 +67,7 @@ class Programa extends Component {
     try {
       //console.log(info);
 
-      const response = await fetch(process.env.API_PROGRAMAS, {
+      const response = await fetch(this.state.API_PROGRAMAS, {
         method: 'POST', // or 'PUT'
         body: JSON.stringify(this.state.form),
         headers: {
