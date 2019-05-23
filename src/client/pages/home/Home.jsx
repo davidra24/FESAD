@@ -3,6 +3,8 @@ import Navbar from '../../components/navbar/Navbar';
 import Loading from '../../components/loading/Loading';
 import Inicio from '../inicio/Inicio';
 import PanelUsuario from '../panel-usuario/PanelUsuario';
+import Programa from '../programas/Programa';
+import NotFound from '../../components/notFound/NotFound';
 
 class Home extends Component {
   state = {
@@ -15,10 +17,12 @@ class Home extends Component {
     switch (this.props.location.pathname) {
       case '/home/start':
         return <Inicio />;
+      case '/home/careers':
+        return <Programa />;
       case '/home/profile':
         return <PanelUsuario />;
       default:
-        return <Loading />;
+        return <NotFound />;
     }
   };
 

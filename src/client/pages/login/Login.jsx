@@ -1,13 +1,20 @@
 import React, { Component, Fragment } from 'react';
-import logo from '../../images/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect } from 'react-router-dom';
+import logo from '../../images/logo.png';
 
 class Login extends Component {
   handleSubmit = e => {
     e.preventDefault();
-    this.props.history.push('/', { logged: true });
+    this.comprobarSesion(true);
   };
+
+  comprobarSesion(iniciar) {
+    this.props.history.push('/', { logged: iniciar });
+    if (iniciar === true) {
+      document.body.style.background = 'white';
+    }
+  }
 
   render() {
     if (this.props.location.state.logged) {

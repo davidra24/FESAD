@@ -3,7 +3,7 @@ import '../../styles/loading.css';
 
 function Loading(props) {
   return (
-    <React.Fragment>
+    <div className="d-flex justify-content-center">
       <div className="lds-css ng-scope">
         <div style={{ width: '100%', height: '100%' }} className="lds-pacman">
           <div>
@@ -17,8 +17,7 @@ function Loading(props) {
           </div>
         </div>
       </div>
-      <h3>Comming soon...</h3>
-    </React.Fragment>
+    </div>
   );
 }
 export default Loading;

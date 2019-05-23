@@ -1,20 +1,41 @@
 import React, { Component, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import logo from '../../images/logo.png';
 import { Link } from 'react-router-dom';
+import logo from '../../images/logo-cread.png';
 
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.state = {
+      collapsed: true
+    };
+  }
+  toggleNavbar() {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+  }
   render() {
+    const collapsed = this.state.collapsed;
+    const classOne = collapsed
+      ? 'collapse navbar-collapse'
+      : 'collapse navbar-collapse show';
+    const classTwo = collapsed
+      ? 'navbar-toggler navbar-toggler-right collapsed'
+      : 'navbar-toggler navbar-toggler-right';
     return (
       <Fragment>
         <nav
           className="navbar navbar-expand-lg navbar-dark"
-          style={{ backgroundColor: '#247BB0' }}
+          style={{ backgroundColor: '#1B2021' }}
         >
           <Link className="navbar-brand" to="/">
             <img src={logo} alt="logo-uptc" className="reduce" />
           </Link>
           <button
+            onClick={this.toggleNavbar}
+            className={`${classTwo}`}
             className="navbar-toggler"
             type="button"
             data-toggle="collapse"
@@ -25,10 +46,7 @@ class Navbar extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div
-            className="collapse navbar-collapse "
-            id="navbarSupportedContent"
-          >
+          <div className={`${classOne}`} id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active ">
                 <div className="justify-content-center text-center">
