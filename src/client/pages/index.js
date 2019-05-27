@@ -17,11 +17,10 @@ import {
   faSave
 } from '@fortawesome/free-solid-svg-icons';
 import Login from './login/Login';
-import NorFound from '../components/notFound/NotFound';
 import Principal from './principal/Principal';
 import Home from './home/Home';
+import NotFound from './notFound/NotFound';
 import '../styles/app.css';
-import NotFound from '../components/notFound/NotFound';
 
 library.add(
   faUserCircle,
@@ -52,6 +51,7 @@ class Index extends Component {
         <Route exact path="/home/teachers" component={Home} />
         <Route exact path="/home/classrooms" component={Home} />
         <Route exact path="/home/profile" component={Home} />
+        <Route exact path="/home/careers/:id" component={Home} />
         <Route component={NotFound} />
       </Switch>
     );

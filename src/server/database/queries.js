@@ -47,7 +47,7 @@ module.exports.createUser = async (req, res, next) => {
 };
 
 module.exports.deleteUser = (req, res, next) => {
-  var usrID = parseInt(req.params.cedula);
+  var usrID = parseInt(req.params.id);
   db.result('delete from usuarios where id = $1', usrID)
     .then(function(result) {
       res.status(200).json({
@@ -121,7 +121,7 @@ module.exports.createCareer = (req, res, next) => {
 };
 
 module.exports.deleteCareer = (req, res, next) => {
-  var usrID = parseInt(req.params.cedula);
+  var usrID = parseInt(req.params.id);
   db.result('delete from programas where id = $1', usrID)
     .then(function(result) {
       res.status(200).json({

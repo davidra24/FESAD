@@ -21,17 +21,20 @@ class Home extends Component {
         return <Programa />;
       case '/home/profile':
         return <PanelUsuario />;
+      case '/home/careers/:id':
+        break;
       default:
         return <NotFound />;
     }
   };
 
   render() {
+    const toRender = this.handleRender();
     return (
       <Navbar>
         <div className="container-fluid">
           <div className="row justify-content-center">
-            <div className="col-12">{this.handleRender()}</div>
+            <div className="col-12">{toRender}</div>
           </div>
         </div>
       </Navbar>

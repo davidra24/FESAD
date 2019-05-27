@@ -18,7 +18,7 @@ function ProgramaItem(props) {
           </button>
         </div>
         <div className="col-6 col-md-1">
-          <button className="btn btn-danger">
+          <button className="btn btn-danger" onClick={props.handleRemove}>
             <FontAwesomeIcon icon="trash" />
           </button>
         </div>
@@ -31,11 +31,15 @@ function ConsultarPrograma(props) {
     return <Error error={props.error.message} />;
   }
   return (
-    <ul>
+    <ul className="list-unstyled">
       {props.careers.map(career => {
         return (
           <li key={career.id} style={{ listStyleType: 'none' }}>
-            <ProgramaItem career={career} />
+            <ProgramaItem
+              career={career}
+              handleRemove={e => props.handleRemove(e, career)}
+              handleEdit={e => props.handleEdit(e, career)}
+            />
           </li>
         );
       })}
