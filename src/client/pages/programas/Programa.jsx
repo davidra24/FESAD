@@ -4,7 +4,6 @@ import ConsultarPrograma from '../../components/programas/ConsultarPrograma';
 import Loading from '../../components/loading/Loading';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { isNull } from 'util';
 
 class Programa extends Component {
   MySwal = withReactContent(Swal);
