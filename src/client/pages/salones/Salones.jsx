@@ -1,34 +1,25 @@
 import React, { Component } from 'react';
-import AgregarPrograma from '../../components/programas/AgregarPrograma';
-import ConsultarPrograma from '../../components/programas/ConsultarPrograma';
+import AgregarSalon from '../../components/salones/AgregarSalon';
+import ConsultarSalon from '../../components/salones/ConsultarSalon';
 import Loading from '../../components/loading/Loading';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-class Programa extends Component {
+class Salones extends Component {
   MySwal = withReactContent(Swal);
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   state = {
-    semestres: this.semestres(),
     data: [],
-    loading: false,
+    loading: true,
     error: null,
     form: {
       nombre: '',
-      semestres: ''
+      ubicacion: ''
     }
   };
-  semestres() {
-    let arr = new Array();
-    arr.push(<option key={0} />);
-    for (let i = 1; i <= 10; i++) {
-      arr.push(<option key={i}>{i}</option>);
-    }
-    return arr;
-  }
   componentDidMount() {
     this.get();
   }
@@ -62,7 +53,7 @@ class Programa extends Component {
       loading: true,
       error: null
     });
-    if (this.state.form.nombre != '') {
+    if (this.state.form.nombre != '' && this.state.form.ubicacion != '') {
       try {
         const response = await fetch(this.props.api, {
           method: 'POST',
@@ -80,7 +71,7 @@ class Programa extends Component {
           this.MySwal.fire({
             position: 'top-end',
             type: 'success',
-            title: 'Se ha guardado el programa satsfactoriamente',
+            title: 'Se ha guardado el salón satsfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -89,7 +80,7 @@ class Programa extends Component {
             type: 'error',
             position: 'top-end',
             title: 'Oops...',
-            text: 'No se ha podido crear el programa ',
+            text: 'No se ha podido crear el salón ',
             showConfirmButton: false,
             timer: 1500
           });
@@ -112,7 +103,7 @@ class Programa extends Component {
         type: 'error',
         position: 'top-end',
         title: 'Oops...',
-        text: 'No se ha podido crear el programa ',
+        text: 'No se ha podido crear el salón ',
         showConfirmButton: false,
         timer: 1500
       });
@@ -122,7 +113,7 @@ class Programa extends Component {
     this.setState({
       form: {
         nombre: '',
-        semestres: ''
+        ubicacion: ''
       }
     });
   };
@@ -137,7 +128,7 @@ class Programa extends Component {
   handleRemove = (e, data) => {
     this.MySwal.fire({
       title: '¿Está seguro?',
-      text: '¿Está seguro que desea eliminar este programa?',
+      text: '¿Está seguro que desea eliminar este salón?',
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -152,29 +143,29 @@ class Programa extends Component {
   };
   handleEdit = async (e, data) => {
     await this.MySwal.fire({
-      title: 'Editar programa',
+      title: 'Editar salón',
       html:
         '<label>Nombre:</label>' +
-        `<input id="nombre_programa" class="swal2-input" placeholder="Nombre" value="${
+        `<input id="nombre_salon" class="swal2-input" placeholder="Nombre" value="${
           data.nombre
         }"/>` +
-        '<label>Número de semestres:</label>' +
-        `<input id="semestres_programa" class="swal2-input" placeholder="Semestres" value="${
-          data.semestres
+        '<label>Ubicacion:</label>' +
+        `<input id="ubicacion_salon" class="swal2-input" placeholder="Ubicación" value="${
+          data.ubicacion
         }"/>`,
       focusConfirm: false,
       preConfirm: () => {
-        const nombres = document.getElementById('nombre_programa').value;
-        const semestres = document.getElementById('semestres_programa').value;
+        const nombre = document.getElementById('nombre_salon').value;
+        const ubicacion = document.getElementById('ubicacion_salon').value;
         this.setState({
           form: {
-            nombres: nombres,
-            semestres: semestres
+            nombre: nombre,
+            ubicacion: ubicacion
           }
         });
       }
     });
-    if (this.state.form.nombre != '' && !this.state.form.semestres.isNaN) {
+    if (this.state.form.nombre != '' && this.state.form.ubicacion != '') {
       this.edit(data.id);
     }
   };
@@ -183,7 +174,7 @@ class Programa extends Component {
       loading: true,
       error: null
     });
-    if (this.state.form.nombre != '') {
+    if (this.state.form.nombre != '' && this.state.form.ubicacion != '') {
       try {
         const response = await fetch(`${this.props.api}/${id}`, {
           method: 'PUT',
@@ -201,7 +192,7 @@ class Programa extends Component {
           this.MySwal.fire({
             position: 'top-end',
             type: 'success',
-            title: 'Se ha actualizado el programa satsfactoriamente',
+            title: 'Se ha actualizado el salón satsfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -210,7 +201,7 @@ class Programa extends Component {
             type: 'error',
             position: 'top-end',
             title: 'Oops...',
-            text: 'No se ha podido editar el programa ',
+            text: 'No se ha podido editar el salón ',
             showConfirmButton: false,
             timer: 1500
           });
@@ -230,7 +221,7 @@ class Programa extends Component {
         type: 'error',
         position: 'top-end',
         title: 'Oops...',
-        text: 'No se ha podido editar el programa ',
+        text: 'No se ha podido editar el salón ',
         showConfirmButton: false,
         timer: 1500
       });
@@ -250,7 +241,7 @@ class Programa extends Component {
           this.MySwal.fire({
             position: 'top-end',
             type: 'success',
-            title: 'Se ha eliminado el programa satsfactoriamente',
+            title: 'Se ha eliminado el salón satsfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -259,7 +250,7 @@ class Programa extends Component {
             type: 'error',
             position: 'top-end',
             title: 'Oops...',
-            text: 'No se ha podido eliminar el programa seleccionado',
+            text: 'No se ha podido eliminar el salón seleccionado',
             showConfirmButton: false,
             timer: 1500
           });
@@ -270,7 +261,7 @@ class Programa extends Component {
           type: 'error',
           position: 'top-end',
           title: 'Oops...',
-          text: 'No se ha podido eliminar el programa seleccionado',
+          text: 'No se ha podido eliminar el salón seleccionado',
           showConfirmButton: false,
           timer: 1500
         });
@@ -281,17 +272,16 @@ class Programa extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col-12">
-            <AgregarPrograma
-              semestres={this.state.semestres}
+            <AgregarSalon
               formNombre={this.state.form.nombre}
-              formSemestres={this.state.form.semestres}
+              formUbicacion={this.state.form.ubicacion}
               handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
             />
             {this.state.loading && <Loading />}
-            <ConsultarPrograma
+            <ConsultarSalon
               error={this.state.error}
-              careers={this.state.data}
+              salons={this.state.data}
               handleEdit={this.handleEdit}
               handleRemove={this.handleRemove}
             />
@@ -302,4 +292,4 @@ class Programa extends Component {
   }
 }
 
-export default Programa;
+export default Salones;

@@ -32,7 +32,6 @@ app.use(cors());
 require('../../config/passport/')(app);
 
 app.get('*', (req, res) => {
-  console.log('usuario ' + req.usuario);
   const index = path.join(__dirname, bundle);
   res.sendFile(index);
 });

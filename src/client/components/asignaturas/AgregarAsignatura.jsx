@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-function AgregarPrograma(props) {
+function AgregarAsignatura(props) {
   return (
     <form className="form-group" onSubmit={props.handleSubmit}>
       <div className="container-fluid">
         <div className="alert addBorder">
           <div className="row">
-            <div className="col-12 col-md-6 col-lg-4">
+            <div className="col-12 col-md-8">
               <label>Nombre:</label>
               <input
                 type="text"
@@ -16,20 +16,7 @@ function AgregarPrograma(props) {
                 value={props.formNombre}
               />
             </div>
-            <div className="col-12 col-md-6 col-lg-4">
-              <label>Número de semestres: </label>
-              <select
-                id="selectSemestre"
-                className="form-control"
-                name="semestres"
-                onChange={props.handleChange}
-                value={props.formSemestres}
-              >
-                {props.semestres}
-              </select>
-            </div>
-
-            <div className="col-12 col-md-6 col-lg-4">
+            <div className="col-12 col-md-4">
               <br />
               <button className="btn btn-success btn-block form-control">
                 Guardar
@@ -42,4 +29,4 @@ function AgregarPrograma(props) {
   );
 }
 
-export default AgregarPrograma;
+export default AgregarAsignatura;

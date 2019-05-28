@@ -1,13 +1,20 @@
 import React, { Component, Fragment } from 'react';
+import construccion from '../../images/construccion.png';
 
 class Inicio extends Component {
-  state = {
-    message: 'Hola desde inicio'
-  };
   render() {
     return (
       <Fragment>
-        <h1>{this.state.message}</h1>
+        <br />
+        <br />
+        <div className="d-flex justify-content-center">
+          <img
+            src={construccion}
+            alt="estamos en contrucción"
+            style={{ width: '25%', height: '25%' }}
+          />
+        </div>
+        <h1>Estamos en contrucción...</h1>
       </Fragment>
     );
   }

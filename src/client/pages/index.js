@@ -45,7 +45,7 @@ class Index extends Component {
       <Switch>
         <Route exact path="/" component={Principal} isLogged="false" />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/home/start" component={Home} />
+        <Route exact path="/home" component={Home} />
         <Route exact path="/home/careers" component={Home} />
         <Route exact path="/home/subjects" component={Home} />
         <Route exact path="/home/teachers" component={Home} />

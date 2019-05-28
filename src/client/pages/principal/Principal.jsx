@@ -19,7 +19,7 @@ class Principal extends Component {
     if (this.state.logged) {
       return (
         <Redirect
-          to={{ pathname: '/home/start', state: { user: this.state.user } }}
+          to={{ pathname: '/home', state: { user: this.state.user } }}
         />
       );
     } else {

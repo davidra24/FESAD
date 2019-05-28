@@ -8,7 +8,6 @@ api.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 api.use(bodyParser.urlencoded({ extended: false }));
 
 /** Usuarios */
-
 api.get('/usuarios', query.getAllUsers);
 api.get('/usuarios/:id', query.getSingleUser);
 api.post('/usuarios', query.createUser);
@@ -21,5 +20,33 @@ api.get('/programas/:id', query.getSingleCareer);
 api.post('/programas', query.createCareer);
 api.put('/programas/:id', query.updateCareer);
 api.delete('/programas/:id', query.deleteCareer);
+
+/** Asignaturas */
+api.get('/asignaturas', query.getAllSubjects);
+api.get('/asignaturas/:id', query.getSingleSubject);
+api.post('/asignaturas', query.createSubject);
+api.put('/asignaturas/:id', query.updateSubject);
+api.delete('/asignaturas/:id', query.deleteSubject);
+
+/** Docentes */
+api.get('/docentes', query.getAllTeachers);
+api.get('/docentes/:id', query.getSingleTeacher);
+api.post('/docentes', query.createTeacher);
+api.put('/docentes/:id', query.updateTeacher);
+api.delete('/docentes/:id', query.deleteTeacher);
+
+/** Semestres */
+api.get('/semestres', query.getAllSemesters);
+api.get('/semestres/:id', query.getSingleSemester);
+api.post('/semestres', query.createSemester);
+api.put('/semestres/:id', query.updateSemester);
+api.delete('/semestres/:id', query.deleteSemester);
+
+/** Salones */
+api.get('/salones', query.getAllClassRooms);
+api.get('/salones/:id', query.getSingleClassRoom);
+api.post('/salones', query.createClassRoom);
+api.put('/salones/:id', query.updateClassRoom);
+api.delete('/salones/:id', query.deleteClassRoom);
 
 module.exports = api;

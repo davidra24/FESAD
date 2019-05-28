@@ -1,34 +1,24 @@
 import React, { Component } from 'react';
-import AgregarPrograma from '../../components/programas/AgregarPrograma';
-import ConsultarPrograma from '../../components/programas/ConsultarPrograma';
+import AgregarAsignatura from '../../components/asignaturas/AgregarAsignatura';
+import ConsultarAsignatura from '../../components/asignaturas/ConsultarAsignatura';
 import Loading from '../../components/loading/Loading';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-class Programa extends Component {
+class Asignaturas extends Component {
   MySwal = withReactContent(Swal);
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   state = {
-    semestres: this.semestres(),
     data: [],
-    loading: false,
+    loading: true,
     error: null,
     form: {
-      nombre: '',
-      semestres: ''
+      nombre: ''
     }
   };
-  semestres() {
-    let arr = new Array();
-    arr.push(<option key={0} />);
-    for (let i = 1; i <= 10; i++) {
-      arr.push(<option key={i}>{i}</option>);
-    }
-    return arr;
-  }
   componentDidMount() {
     this.get();
   }
@@ -80,7 +70,7 @@ class Programa extends Component {
           this.MySwal.fire({
             position: 'top-end',
             type: 'success',
-            title: 'Se ha guardado el programa satsfactoriamente',
+            title: 'Se ha guardado la asignatura satsfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -89,7 +79,7 @@ class Programa extends Component {
             type: 'error',
             position: 'top-end',
             title: 'Oops...',
-            text: 'No se ha podido crear el programa ',
+            text: 'No se ha podido crear la asignatura ',
             showConfirmButton: false,
             timer: 1500
           });
@@ -112,7 +102,7 @@ class Programa extends Component {
         type: 'error',
         position: 'top-end',
         title: 'Oops...',
-        text: 'No se ha podido crear el programa ',
+        text: 'No se ha podido crear la asignatura ',
         showConfirmButton: false,
         timer: 1500
       });
@@ -121,8 +111,7 @@ class Programa extends Component {
   clear = () => {
     this.setState({
       form: {
-        nombre: '',
-        semestres: ''
+        nombre: ''
       }
     });
   };
@@ -137,7 +126,7 @@ class Programa extends Component {
   handleRemove = (e, data) => {
     this.MySwal.fire({
       title: '¿Está seguro?',
-      text: '¿Está seguro que desea eliminar este programa?',
+      text: '¿Está seguro que desea eliminar estaa?',
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -152,29 +141,23 @@ class Programa extends Component {
   };
   handleEdit = async (e, data) => {
     await this.MySwal.fire({
-      title: 'Editar programa',
+      title: 'Editar asignatura',
       html:
         '<label>Nombre:</label>' +
-        `<input id="nombre_programa" class="swal2-input" placeholder="Nombre" value="${
+        `<input id="nombre_asignatura" class="swal2-input" placeholder="Nombre" value="${
           data.nombre
-        }"/>` +
-        '<label>Número de semestres:</label>' +
-        `<input id="semestres_programa" class="swal2-input" placeholder="Semestres" value="${
-          data.semestres
         }"/>`,
       focusConfirm: false,
       preConfirm: () => {
-        const nombres = document.getElementById('nombre_programa').value;
-        const semestres = document.getElementById('semestres_programa').value;
+        const nombre = document.getElementById('nombre_asignatura').value;
         this.setState({
           form: {
-            nombres: nombres,
-            semestres: semestres
+            nombre: nombre
           }
         });
       }
     });
-    if (this.state.form.nombre != '' && !this.state.form.semestres.isNaN) {
+    if (this.state.form.nombre != '') {
       this.edit(data.id);
     }
   };
@@ -201,7 +184,7 @@ class Programa extends Component {
           this.MySwal.fire({
             position: 'top-end',
             type: 'success',
-            title: 'Se ha actualizado el programa satsfactoriamente',
+            title: 'Se ha actualizado la asignatura satsfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -210,7 +193,7 @@ class Programa extends Component {
             type: 'error',
             position: 'top-end',
             title: 'Oops...',
-            text: 'No se ha podido editar el programa ',
+            text: 'No se ha podido editar la asignatura ',
             showConfirmButton: false,
             timer: 1500
           });
@@ -230,7 +213,7 @@ class Programa extends Component {
         type: 'error',
         position: 'top-end',
         title: 'Oops...',
-        text: 'No se ha podido editar el programa ',
+        text: 'No se ha podido editar la asignatura',
         showConfirmButton: false,
         timer: 1500
       });
@@ -250,7 +233,7 @@ class Programa extends Component {
           this.MySwal.fire({
             position: 'top-end',
             type: 'success',
-            title: 'Se ha eliminado el programa satsfactoriamente',
+            title: 'Se ha eliminado la asignatura satsfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -259,7 +242,7 @@ class Programa extends Component {
             type: 'error',
             position: 'top-end',
             title: 'Oops...',
-            text: 'No se ha podido eliminar el programa seleccionado',
+            text: 'No se ha podido eliminar la asignatura seleccionada',
             showConfirmButton: false,
             timer: 1500
           });
@@ -270,7 +253,7 @@ class Programa extends Component {
           type: 'error',
           position: 'top-end',
           title: 'Oops...',
-          text: 'No se ha podido eliminar el programa seleccionado',
+          text: 'No se ha podido eliminar la asignatura seleccionada',
           showConfirmButton: false,
           timer: 1500
         });
@@ -281,17 +264,15 @@ class Programa extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col-12">
-            <AgregarPrograma
-              semestres={this.state.semestres}
+            <AgregarAsignatura
               formNombre={this.state.form.nombre}
-              formSemestres={this.state.form.semestres}
               handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
             />
             {this.state.loading && <Loading />}
-            <ConsultarPrograma
+            <ConsultarAsignatura
               error={this.state.error}
-              careers={this.state.data}
+              subjects={this.state.data}
               handleEdit={this.handleEdit}
               handleRemove={this.handleRemove}
             />
@@ -302,4 +283,4 @@ class Programa extends Component {
   }
 }
 
-export default Programa;
+export default Asignaturas;

@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import Navbar from '../../components/navbar/Navbar';
-import Loading from '../../components/loading/Loading';
 import Inicio from '../inicio/Inicio';
-import PanelUsuario from '../panel-usuario/PanelUsuario';
 import Programa from '../programas/Programa';
+import Asignaturas from '../asignaturas/Asignaturas';
+import Docentes from '../docentes/Docentes';
+import Salones from '../salones/Salones';
+import PanelUsuario from '../panel-usuario/PanelUsuario';
 import NotFound from '../../components/notFound/NotFound';
 
 class Home extends Component {
@@ -15,14 +17,18 @@ class Home extends Component {
 
   handleRender = () => {
     switch (this.props.location.pathname) {
-      case '/home/start':
+      case '/home':
         return <Inicio />;
       case '/home/careers':
-        return <Programa />;
+        return <Programa api="/api/programas" />;
+      case '/home/subjects':
+        return <Asignaturas api="/api/asignaturas" />;
+      case '/home/teachers':
+        return <Docentes api="/api/docentes" />;
+      case '/home/classrooms':
+        return <Salones api="/api/salones" />;
       case '/home/profile':
         return <PanelUsuario />;
-      case '/home/careers/:id':
-        break;
       default:
         return <NotFound />;
     }

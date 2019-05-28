@@ -50,7 +50,7 @@ class Navbar extends Component {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active ">
                 <div className="justify-content-center text-center">
-                  <Link className="nav-link" to="/home/start">
+                  <Link className="nav-link" to="/home">
                     <FontAwesomeIcon icon="home" size="3x" />
                     <h3>Inicio</h3>
                     <span className="sr-only">(current)</span>

@@ -1,34 +1,26 @@
 import React, { Component } from 'react';
-import AgregarPrograma from '../../components/programas/AgregarPrograma';
-import ConsultarPrograma from '../../components/programas/ConsultarPrograma';
+import AgregarDocente from '../../components/docentes/AgregarDocente';
+import ConsultarDocente from '../../components/docentes/ConsultarDocente';
 import Loading from '../../components/loading/Loading';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-class Programa extends Component {
+class Docentes extends Component {
   MySwal = withReactContent(Swal);
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   state = {
-    semestres: this.semestres(),
     data: [],
-    loading: false,
+    loading: true,
     error: null,
     form: {
       nombre: '',
-      semestres: ''
+      correo: '',
+      telefono: ''
     }
   };
-  semestres() {
-    let arr = new Array();
-    arr.push(<option key={0} />);
-    for (let i = 1; i <= 10; i++) {
-      arr.push(<option key={i}>{i}</option>);
-    }
-    return arr;
-  }
   componentDidMount() {
     this.get();
   }
@@ -62,7 +54,11 @@ class Programa extends Component {
       loading: true,
       error: null
     });
-    if (this.state.form.nombre != '') {
+    if (
+      this.state.form.nombre != '' &&
+      this.state.form.correo != '' &&
+      this.state.form.telefono != ''
+    ) {
       try {
         const response = await fetch(this.props.api, {
           method: 'POST',
@@ -80,7 +76,7 @@ class Programa extends Component {
           this.MySwal.fire({
             position: 'top-end',
             type: 'success',
-            title: 'Se ha guardado el programa satsfactoriamente',
+            title: 'Se ha guardado el docente satsfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -89,7 +85,7 @@ class Programa extends Component {
             type: 'error',
             position: 'top-end',
             title: 'Oops...',
-            text: 'No se ha podido crear el programa ',
+            text: 'No se ha podido crear el docente ',
             showConfirmButton: false,
             timer: 1500
           });
@@ -112,7 +108,7 @@ class Programa extends Component {
         type: 'error',
         position: 'top-end',
         title: 'Oops...',
-        text: 'No se ha podido crear el programa ',
+        text: 'No se ha podido crear el docente ',
         showConfirmButton: false,
         timer: 1500
       });
@@ -122,7 +118,8 @@ class Programa extends Component {
     this.setState({
       form: {
         nombre: '',
-        semestres: ''
+        correo: '',
+        telefono: ''
       }
     });
   };
@@ -137,7 +134,7 @@ class Programa extends Component {
   handleRemove = (e, data) => {
     this.MySwal.fire({
       title: '¿Está seguro?',
-      text: '¿Está seguro que desea eliminar este programa?',
+      text: '¿Está seguro que desea eliminar este docente?',
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -152,29 +149,39 @@ class Programa extends Component {
   };
   handleEdit = async (e, data) => {
     await this.MySwal.fire({
-      title: 'Editar programa',
+      title: 'Editar docente',
       html:
         '<label>Nombre:</label>' +
-        `<input id="nombre_programa" class="swal2-input" placeholder="Nombre" value="${
+        `<input id="nombre_docente" class="swal2-input" placeholder="Nombre" value="${
           data.nombre
         }"/>` +
-        '<label>Número de semestres:</label>' +
-        `<input id="semestres_programa" class="swal2-input" placeholder="Semestres" value="${
-          data.semestres
+        '<label>Correo:</label>' +
+        `<input id="correo_docente" class="swal2-input" placeholder="Correo" value="${
+          data.correo
+        }"/>` +
+        '<label>Teléfono:</label>' +
+        `<input id="telefono_docente" class="swal2-input" placeholder="Teléfono" value="${
+          data.telefono
         }"/>`,
       focusConfirm: false,
       preConfirm: () => {
-        const nombres = document.getElementById('nombre_programa').value;
-        const semestres = document.getElementById('semestres_programa').value;
+        const nombre = document.getElementById('nombre_docente').value;
+        const correo = document.getElementById('correo_docente').value;
+        const telefono = document.getElementById('telefono_docente').value;
         this.setState({
           form: {
-            nombres: nombres,
-            semestres: semestres
+            nombre: nombre,
+            correo: correo,
+            telefono: telefono
           }
         });
       }
     });
-    if (this.state.form.nombre != '' && !this.state.form.semestres.isNaN) {
+    if (
+      this.state.form.nombre != '' &&
+      this.state.form.correo != '' &&
+      this.state.form.telefono != ''
+    ) {
       this.edit(data.id);
     }
   };
@@ -183,7 +190,11 @@ class Programa extends Component {
       loading: true,
       error: null
     });
-    if (this.state.form.nombre != '') {
+    if (
+      this.state.form.nombre != '' &&
+      this.state.form.correo != '' &&
+      this.state.form.telefono != ''
+    ) {
       try {
         const response = await fetch(`${this.props.api}/${id}`, {
           method: 'PUT',
@@ -201,7 +212,7 @@ class Programa extends Component {
           this.MySwal.fire({
             position: 'top-end',
             type: 'success',
-            title: 'Se ha actualizado el programa satsfactoriamente',
+            title: 'Se ha actualizado el docente satsfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -210,7 +221,7 @@ class Programa extends Component {
             type: 'error',
             position: 'top-end',
             title: 'Oops...',
-            text: 'No se ha podido editar el programa ',
+            text: 'No se ha podido editar el docente ',
             showConfirmButton: false,
             timer: 1500
           });
@@ -230,7 +241,7 @@ class Programa extends Component {
         type: 'error',
         position: 'top-end',
         title: 'Oops...',
-        text: 'No se ha podido editar el programa ',
+        text: 'No se ha podido editar el docente ',
         showConfirmButton: false,
         timer: 1500
       });
@@ -250,7 +261,7 @@ class Programa extends Component {
           this.MySwal.fire({
             position: 'top-end',
             type: 'success',
-            title: 'Se ha eliminado el programa satsfactoriamente',
+            title: 'Se ha eliminado el docente satsfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -259,7 +270,7 @@ class Programa extends Component {
             type: 'error',
             position: 'top-end',
             title: 'Oops...',
-            text: 'No se ha podido eliminar el programa seleccionado',
+            text: 'No se ha podido eliminar el docente seleccionado',
             showConfirmButton: false,
             timer: 1500
           });
@@ -270,7 +281,7 @@ class Programa extends Component {
           type: 'error',
           position: 'top-end',
           title: 'Oops...',
-          text: 'No se ha podido eliminar el programa seleccionado',
+          text: 'No se ha podido eliminar el docente seleccionado',
           showConfirmButton: false,
           timer: 1500
         });
@@ -281,17 +292,17 @@ class Programa extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col-12">
-            <AgregarPrograma
-              semestres={this.state.semestres}
+            <AgregarDocente
               formNombre={this.state.form.nombre}
-              formSemestres={this.state.form.semestres}
+              formCorreo={this.state.form.correo}
+              formTelefono={this.state.form.telefono}
               handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
             />
             {this.state.loading && <Loading />}
-            <ConsultarPrograma
+            <ConsultarDocente
               error={this.state.error}
-              careers={this.state.data}
+              teachers={this.state.data}
               handleEdit={this.handleEdit}
               handleRemove={this.handleRemove}
             />
@@ -302,4 +313,4 @@ class Programa extends Component {
   }
 }
 
-export default Programa;
+export default Docentes;
