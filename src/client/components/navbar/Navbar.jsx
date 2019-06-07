@@ -48,7 +48,7 @@ class Navbar extends Component {
           </button>
           <div className={`${classOne}`} id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item active ">
+              <li className="nav-item active" onClick={this.toggleNavbar}>
                 <div className="justify-content-center text-center">
                   <Link className="nav-link" to="/home">
                     <FontAwesomeIcon icon="home" size="3x" />
@@ -57,41 +57,41 @@ class Navbar extends Component {
                   </Link>
                 </div>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" onClick={this.toggleNavbar}>
                 <div className="justify-content-center text-center">
-                  <Link className="nav-link" to="/home/careers">
+                  <Link className="nav-link" to="/careers">
                     <FontAwesomeIcon icon="brain" size="3x" />
                     <h3>Programas</h3>
                   </Link>
                 </div>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" onClick={this.toggleNavbar}>
                 <div className="justify-content-center text-center">
-                  <Link className="nav-link" to="/home/subjects">
+                  <Link className="nav-link" to="/subjects">
                     <FontAwesomeIcon icon="book-reader" size="3x" />
                     <h3>Asignaturas</h3>
                   </Link>
                 </div>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" onClick={this.toggleNavbar}>
                 <div className="justify-content-center text-center">
-                  <Link className="nav-link" to="/home/teachers">
+                  <Link className="nav-link" to="/teachers">
                     <FontAwesomeIcon icon="chalkboard-teacher" size="3x" />
                     <h3>Docentes</h3>
                   </Link>
                 </div>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" onClick={this.toggleNavbar}>
                 <div className="justify-content-center text-center">
-                  <Link className="nav-link" to="/home/classrooms">
+                  <Link className="nav-link" to="/classrooms">
                     <FontAwesomeIcon icon="building" size="3x" />
                     <h3>Salones</h3>
                   </Link>
                 </div>
               </li>
-              <li className="nav-item dropdown">
+              <li className="nav-item" onClick={this.toggleNavbar}>
                 <div className="justify-content-center text-center">
-                  <Link className="nav-link " to="/home/profile">
+                  <Link className="nav-link " to="/profile">
                     <FontAwesomeIcon icon="cogs" size="3x" />
                     <h3>Panel de usuario</h3>
                   </Link>

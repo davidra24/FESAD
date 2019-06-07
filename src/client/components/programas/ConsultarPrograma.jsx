@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Error from '../error/Error';
+import { Link } from 'react-router-dom';
 
 function ProgramaItem(props) {
   return (
@@ -35,11 +36,23 @@ function ConsultarPrograma(props) {
       {props.careers.map(career => {
         return (
           <li key={career.id} style={{ listStyleType: 'none' }}>
-            <ProgramaItem
-              career={career}
-              handleRemove={e => props.handleRemove(e, career)}
-              handleEdit={e => props.handleEdit(e, career)}
-            />
+            <Link
+              className="text-reset text-decoration-none"
+              to={{
+                pathname: `/careers/${career.id}`,
+                state: {
+                  semestres: career.semestres,
+                  api: '/api/programas_asignaturas',
+                  apiPA: `/api/asignaturas_programa/${career.id}`
+                }
+              }}
+            >
+              <ProgramaItem
+                career={career}
+                handleRemove={e => props.handleRemove(e, career)}
+                handleEdit={e => props.handleEdit(e, career)}
+              />
+            </Link>
           </li>
         );
       })}

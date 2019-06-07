@@ -135,6 +135,7 @@ class Programa extends Component {
     });
   };
   handleRemove = (e, data) => {
+    e.preventDefault();
     this.MySwal.fire({
       title: '¿Está seguro?',
       text: '¿Está seguro que desea eliminar este programa?',
@@ -151,6 +152,7 @@ class Programa extends Component {
     });
   };
   handleEdit = async (e, data) => {
+    e.preventDefault();
     await this.MySwal.fire({
       title: 'Editar programa',
       html:

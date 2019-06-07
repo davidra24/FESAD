@@ -49,4 +49,12 @@ api.post('/salones', query.createClassRoom);
 api.put('/salones/:id', query.updateClassRoom);
 api.delete('/salones/:id', query.deleteClassRoom);
 
+/** programas asignaturas */
+api.get('/programas_asignaturas', query.getAllCareerSubjects);
+api.get('/programas_asignaturas/:id', query.getSingleCareerSubject);
+api.get('/asignaturas_programa/:id', query.getSingleSubjectFromCareer);
+api.post('/programas_asignaturas', query.createCarrerSubject);
+api.put('/programas_asignaturas/:id', query.updateCareerSubject);
+api.delete('/programas_asignaturas/:id', query.deleteCareerSubject);
+
 module.exports = api;

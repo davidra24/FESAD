@@ -21,6 +21,7 @@ import Principal from './principal/Principal';
 import Home from './home/Home';
 import NotFound from './notFound/NotFound';
 import '../styles/app.css';
+import ProgramaAsignatura from './programa_asignatura/ProgramaAsignatura';
 
 library.add(
   faUserCircle,
@@ -46,12 +47,12 @@ class Index extends Component {
         <Route exact path="/" component={Principal} isLogged="false" />
         <Route exact path="/login" component={Login} />
         <Route exact path="/home" component={Home} />
-        <Route exact path="/home/careers" component={Home} />
-        <Route exact path="/home/subjects" component={Home} />
-        <Route exact path="/home/teachers" component={Home} />
-        <Route exact path="/home/classrooms" component={Home} />
-        <Route exact path="/home/profile" component={Home} />
-        <Route exact path="/home/careers/:id" component={Home} />
+        <Route exact path="/careers" component={Home} />
+        <Route exact path="/subjects" component={Home} />
+        <Route exact path="/teachers" component={Home} />
+        <Route exact path="/classrooms" component={Home} />
+        <Route exact path="/profile" component={Home} />
+        <Route exact path="/careers/:id" component={ProgramaAsignatura} />
         <Route component={NotFound} />
       </Switch>
     );

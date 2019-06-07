@@ -19,15 +19,15 @@ class Home extends Component {
     switch (this.props.location.pathname) {
       case '/home':
         return <Inicio />;
-      case '/home/careers':
+      case '/careers':
         return <Programa api="/api/programas" />;
-      case '/home/subjects':
+      case '/subjects':
         return <Asignaturas api="/api/asignaturas" />;
-      case '/home/teachers':
+      case '/teachers':
         return <Docentes api="/api/docentes" />;
-      case '/home/classrooms':
+      case '/classrooms':
         return <Salones api="/api/salones" />;
-      case '/home/profile':
+      case '/profile':
         return <PanelUsuario />;
       default:
         return <NotFound />;

@@ -19,7 +19,6 @@ function AgregarPrograma(props) {
             <div className="col-12 col-md-6 col-lg-4">
               <label>Número de semestres: </label>
               <select
-                id="selectSemestre"
                 className="form-control"
                 name="semestres"
                 onChange={props.handleChange}

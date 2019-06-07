@@ -479,3 +479,87 @@ module.exports.updateClassRoom = (req, res, next) => {
       return next(err);
     });
 };
+
+/** PROGRAMA_ASIGNATURA */
+module.exports.getAllCareerSubjects = (req, res, next) => {
+  db.any('select * from programas_asignaturas')
+    .then(salones => {
+      res.status(200).json(salones);
+    })
+    .catch(err => next(err));
+};
+
+module.exports.getSingleCareerSubject = (req, res, next) => {
+  var usrID = parseInt(req.params.id);
+  db.one('select * from programas_asignaturas where id = $1', usrID)
+    .then(function(salones) {
+      res.status(200).json(salones);
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+};
+
+module.exports.getSingleSubjectFromCareer = (req, res, next) => {
+  var usrID = parseInt(req.params.id);
+  db.any('select * from programas_asignaturas where id_programa = $1', usrID)
+    .then(function(salones) {
+      res.status(200).json(salones);
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+};
+
+module.exports.createCarrerSubject = (req, res, next) => {
+  db.none(
+    'insert into programas_asignaturas (id, id_programa, id_asignatura, creditos, semestre)' +
+      'values(${id}, ${id_programa}, ${id_asignatura}, ${creditos}, ${semestre})',
+    req.body
+  )
+    .then(function() {
+      res.status(200).json({
+        status: 'success',
+        message: 'Inserted one career subject'
+      });
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+};
+
+module.exports.deleteCareerSubject = (req, res, next) => {
+  var usrID = parseInt(req.params.id);
+  db.result('delete from programas_asignaturas where id = $1', usrID)
+    .then(function(result) {
+      res.status(200).json({
+        status: 'success',
+        message: `Removed ${result.rowCount} carrer subject`
+      });
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+};
+
+module.exports.updateCareerSubject = (req, res, next) => {
+  db.none(
+    'update programas_asignaturas set id_programa=$1, id_asignatura=$2, creditos=$3, semestre=$4 where id=$5',
+    [
+      req.body.id_programa,
+      req.body.id_asignatura,
+      req.body.creditos,
+      req.body.semestre,
+      parseInt(req.params.id)
+    ]
+  )
+    .then(function() {
+      res.status(200).json({
+        status: 'success',
+        message: 'Updated career subject'
+      });
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+};
